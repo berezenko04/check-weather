@@ -1,15 +1,14 @@
-.app {
-    padding-top: 50px;
-}
+@import "./scss/variables.scss";
 
 .container {
-    max-width: 1200px;
+    max-width: 1440px;
     width: 100%;
     margin: 0 auto;
     padding: 0 32px;
 }
 
-.card {
+.weather {
+    margin-top: 64px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,5 +18,63 @@
         display: flex;
         align-items: center;
         gap: 40px;
+    }
+}
+
+.header {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        width: 100%;
+    }
+
+    a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 28px;
+        font-weight: 600;
+        color: $white;
+
+        svg {
+            width: 28px;
+            height: 28px;
+        }
+    }
+
+    &__search {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 2px solid $white;
+        padding: 6px 12px;
+        border-radius: 12px;
+
+        svg {
+            width: 20px;
+            height: 20px;
+
+            path {
+                fill: $white;
+            }
+        }
+
+        input {
+            width: 100%;
+            color: $white;
+            font-size: 18px;
+
+            &::placeholder {
+                color: rgba(255, 255, 255, 0.6);
+            }
+
+            &:focus::placeholder {
+                color: transparent;
+            }
+        }
     }
 }
