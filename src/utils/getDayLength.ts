@@ -6,5 +6,9 @@ export const getDayLength = (t1: number, t2: number) => {
     const hours = Math.floor(lengthInSeconds / 60);
     const minutes = Math.round(lengthInSeconds % 60);
 
-    return `${hours}:${minutes}`;
+    if (minutes < 10) {
+        return `${hours}:0${minutes}`
+    } else {
+        return `${hours}:${minutes}`
+    }
 }

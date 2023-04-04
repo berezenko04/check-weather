@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 //styles
 import styles from './App.module.scss'
-
-//API
-import { getWeather } from './API/weatherService';
 
 //utils
 import { toUTC } from './utils/toUTC';
@@ -14,47 +12,30 @@ import { getDayLength } from './utils/getDayLength';
 import { ReactComponent as SunIcon } from './assets/icons/sun.svg'
 import { ReactComponent as SearchIcon } from './assets/icons/search.svg'
 
-interface WeatherData {
-  weather: {
-    icon: string;
-    main: string;
-  };
-  main: {
-    temp: number;
-    feels_like: number;
-    humidity: number;
-    pressure: number;
-    temp_min: number;
-    temp_max: number;
-  };
-  name: string;
-  visibility: number;
-  wind: {
-    speed: number;
-  }
-  sys: {
-    sunrise: number;
-    sunset: number;
-    country: string;
-  }
-}
+//redux
+import { fetchWeather } from './redux/weather/asyncActions';
+import { useAppDispatch } from './redux/store';
+import { statusSelector, weatherSelector } from './redux/weather/selectors';
+
 
 const App = () => {
-  const [weather, setWeather] = useState<WeatherData | null>(null);
+  const [search, setSearch] = useState<string>('');
+  const dispatch = useAppDispatch();
+
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getWeather();
-      setWeather(data);
-    };
-    fetchData();
+    dispatch(fetchWeather({
+      units: 'metric',
+      cityname: 'Kyiv'
+    }));
   }, []);
 
+  const weather = useSelector(weatherSelector);
+  const status = useSelector(statusSelector);
 
   return (
     <div className={styles.app}>
       <div className={styles.app__wrapper}>
-
         <header className={styles.header}>
           <div className={styles.container}>
             <div className={styles.header__wrapper}>
@@ -65,7 +46,8 @@ const App = () => {
               <div className={styles.header__search__wrapper}>
                 <div className={styles.header__search}>
                   <SearchIcon />
-                  <input type="text" placeholder='Search city...' />
+                  <input type="text" placeholder='Search city...' onChange={(e) => setSearch(e.target.value)} value={search} />
+                  <button onClick={() => dispatch(fetchWeather({ units: 'metric', cityname: search }))}>Search</button>
                 </div>
               </div>
             </div>
@@ -95,10 +77,8 @@ const App = () => {
             <p>Pressure {weather?.main.pressure} гПа</p>
           </div>
         </div>
-
-      </div >
-    </div >
+      </div>
+    </div>
   )
 }
-
 export default App
