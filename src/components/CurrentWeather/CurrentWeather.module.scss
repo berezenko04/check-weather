@@ -1,0 +1,17 @@
+.currentWeather {
+    padding: 32px;
+    width: 100%;
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        border-radius: 8px;
+        background: radial-gradient(2578.15% 286.17% at 0% 50.13%, #2c6eb1 0%, rgba(44, 110, 177, 0) 100%);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+}

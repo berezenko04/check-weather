@@ -4,10 +4,7 @@ export interface WeatherSliceState {
 }
 
 export interface WeatherItem {
-    weather: {
-        icon: string;
-        main: string;
-    };
+    weather: WeatherSecondItem[];
     main: {
         temp: number;
         feels_like: number;
@@ -26,6 +23,11 @@ export interface WeatherItem {
         sunset: number;
         country: string;
     };
+}
+
+type WeatherSecondItem = {
+    icon: string;
+    main: string;
 }
 
 export enum Status {
