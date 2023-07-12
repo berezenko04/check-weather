@@ -1,6 +1,13 @@
+import { WeatherIconProps } from "@/components/WeatherIcon";
+
 export interface WeatherSliceState {
     items: WeatherItem | null;
     status: Status.LOADING | Status.ERROR | Status.SUCCESS;
+    units: 'metric' | 'imperial';
+    tempUnit: 'C' | 'F';
+    windUnit: 'km/h' | 'mph';
+    windUnitCoefficient: 3.6 | 1;
+    visibilityUnit: 'km' | 'miles'
 }
 
 export interface WeatherItem {
@@ -26,8 +33,9 @@ export interface WeatherItem {
 }
 
 type WeatherSecondItem = {
-    icon: string;
     main: string;
+    description: string;
+    icon: string;
 }
 
 export enum Status {

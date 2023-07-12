@@ -2,16 +2,30 @@
     padding: 32px;
     width: 100%;
     position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 0;
 
     &::after {
-        content: "";
+        content: '';
         position: absolute;
-        border-radius: 8px;
-        background: radial-gradient(2578.15% 286.17% at 0% 50.13%, #2c6eb1 0%, rgba(44, 110, 177, 0) 100%);
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        background: radial-gradient(2578.15% 286.17% at 0.00% 50.13%, #2C6EB1 0%, rgba(44, 110, 177, 0) 100%);
+        opacity: 0.8;
+        z-index: -1;
+    }
+
+    &__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
         z-index: -1;
     }
 }

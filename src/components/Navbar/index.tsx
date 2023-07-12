@@ -1,17 +1,17 @@
 import { Link } from '@mui/material'
 
 //styles
-import styles from './Header.module.scss'
+import styles from './Navbar.module.scss'
 
 //components
 import ToggleButtons from '../ToggleButtons'
 import SearchBar from '../SearchBar'
 
-const Header: React.FC = () => {
+const Navbar: React.FC = () => {
     return (
-        <header className={styles.header}>
+        <nav className={styles.navbar}>
             <div className="container">
-                <div className={styles.header__wrapper}>
+                <div className={styles.navbar__wrapper}>
                     <Link
                         href='/'
                         variant='h5'
@@ -25,8 +25,8 @@ const Header: React.FC = () => {
                     <ToggleButtons />
                 </div>
             </div>
-        </header>
+        </nav>
     )
 }
 
-export default Header
+export default Navbar

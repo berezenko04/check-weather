@@ -3,9 +3,10 @@ import { createTheme } from "@mui/material";
 export const theme = createTheme({
     palette: {
         primary: {
-            main: '#1c5288'
+            main: '#1c5288',
         },
         secondary: {
+            light: 'rgba(255, 255, 255, 0.70)',
             main: '#FFFFFF'
         }
     },
@@ -13,14 +14,14 @@ export const theme = createTheme({
         MuiToggleButton: {
             styleOverrides: {
                 root: ({ }) => ({
-                    color: '#FFFFFF',
+                    color: theme.palette.secondary.main,
                     width: '40px',
                     height: '40px',
                     fontSize: '14px !important',
                     border: '1px solid rgba(255, 255, 255, 0.12)',
                     lineHeight: 'inherit',
                     '&.Mui-selected': {
-                        color: '#FFFFFF',
+                        color: theme.palette.secondary.main,
                         backgroundColor: 'rgba(255, 255, 255, 0.08)'
                     }
                 }),
@@ -29,14 +30,14 @@ export const theme = createTheme({
         MuiTextField: {
             styleOverrides: {
                 root: ({ }) => ({
-                    color: '#FFFFFF',
+                    color: theme.palette.secondary.main,
                 }),
             }
         },
         MuiTypography: {
             styleOverrides: {
                 root: ({ }) => ({
-
+                    color: theme.palette.secondary.main,
                 }),
             }
         }
