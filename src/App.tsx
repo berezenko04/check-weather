@@ -8,9 +8,11 @@ import './scss/main.scss'
 //components
 import Navbar from './components/Navbar'
 import CurrentWeather from './components/CurrentWeather'
+import Forecast from './components/Forecast'
+import WeatherForecast from './components/WeatherForecast'
 
 //redux
-import { fetchWeather } from './redux/weather/asyncActions'
+import { fetchCurrentWeather } from './redux/weather/asyncActions'
 import { weatherSelector } from './redux/weather/selectors'
 
 
@@ -19,9 +21,7 @@ const App = () => {
   const { units } = useSelector(weatherSelector);
 
   useEffect(() => {
-    dispatch(fetchWeather({
-      units,
-    }))
+    dispatch(fetchCurrentWeather({}));
   }, [units])
 
   return (
@@ -29,7 +29,15 @@ const App = () => {
       <Navbar />
       <main className='main'>
         <div className="container">
-          <CurrentWeather />
+          <div className='main__wrapper'>
+            <WeatherForecast />
+            <section>
+              <CurrentWeather />
+            </section>
+            <section>
+              <Forecast />
+            </section>
+          </div>
         </div>
       </main>
     </div>

@@ -5,21 +5,34 @@ export type WeatherIconProps = {
 const WeatherIcon: React.FC<WeatherIconProps> = ({ condition }) => {
     let imageSrc = '/WeatherIcons/';
 
-    console.log(condition);
-
     switch (condition.toLowerCase()) {
-        case 'clear':
-            imageSrc += 'clear-sky.png';
+        case 'rain':
+            imageSrc += 'rain.png';
             break;
-        case 'clouds':
-            imageSrc += 'sun-clouds.png';
+        case 'cloudy':
+            imageSrc += 'cloudy.png'
             break;
-        case 'thunder':
-            imageSrc += '';
+        case 'hail':
+            imageSrc += 'hail.png'
+            break;
+        case 'fog':
+            imageSrc += 'fog.png'
+            break;
+        case 'partly-cloudy-day':
+            imageSrc += 'partly-cloudy-day.png'
+            break;
+        case 'partly-cloudy-night':
+            imageSrc += 'partly-cloudy-night.png'
+            break;
+        case 'clear-day':
+            imageSrc += 'clear-day.png'
+            break;
+        case 'clear-night':
+            imageSrc += 'clear-night.png'
             break;
     }
 
-    return <img src={imageSrc} alt={condition} style={{ width: 124, height: 124 }} />;
+    return <img src={imageSrc} alt={condition} style={{ width: 64, height: 64, objectFit: 'cover' }} />;
 };
 
 export default WeatherIcon;

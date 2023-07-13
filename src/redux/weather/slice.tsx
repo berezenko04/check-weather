@@ -1,14 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { fetchWeather } from './asyncActions'
+import { fetchCurrentWeather } from './asyncActions'
 import { Status, WeatherItem, WeatherSliceState } from './types'
 
 const initialState: WeatherSliceState = {
-    items: null,
-    units: 'metric',
+    currentWeather: null,
     status: Status.LOADING,
+    units: 'metric',
     tempUnit: 'C',
     windUnit: 'km/h',
-    windUnitCoefficient: 3.6,
     visibilityUnit: 'km'
 }
 
@@ -21,29 +20,27 @@ export const WeatherSlice = createSlice({
             if (state.units === 'metric') {
                 state.tempUnit = 'C';
                 state.windUnit = 'km/h';
-                state.windUnitCoefficient = 3.6;
                 state.visibilityUnit = 'km'
             } else {
                 state.tempUnit = 'F';
                 state.windUnit = 'mph';
-                state.windUnitCoefficient = 1;
                 state.visibilityUnit = 'miles'
             }
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchWeather.pending, (state) => {
-            state.items = null;
+        builder.addCase(fetchCurrentWeather.pending, (state) => {
+            state.currentWeather = null;
             state.status = Status.LOADING;
         })
 
-        builder.addCase(fetchWeather.fulfilled, (state, action: PayloadAction<WeatherItem>) => {
-            state.items = action.payload;
+        builder.addCase(fetchCurrentWeather.fulfilled, (state, action: PayloadAction<WeatherItem>) => {
+            state.currentWeather = action.payload;
             state.status = Status.SUCCESS;
         })
 
-        builder.addCase(fetchWeather.rejected, (state) => {
-            state.items = null;
+        builder.addCase(fetchCurrentWeather.rejected, (state) => {
+            state.currentWeather = null;
             state.status = Status.ERROR;
         })
     }

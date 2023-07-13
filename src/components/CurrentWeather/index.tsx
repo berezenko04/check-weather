@@ -7,7 +7,6 @@ import styles from './CurrentWeather.module.scss'
 
 //utils
 import { format12Hours } from '@/utils/format12Hours'
-import { calculateDewPoint } from '@/utils/calculateDewPoint'
 
 //icons
 import SunCloudsImg from '/WeatherImages/sun-clouds.jpg'
@@ -18,17 +17,18 @@ import WeatherIcon from '../WeatherIcon'
 //redux
 import { weatherSelector } from '@/redux/weather/selectors'
 
+
 const CurrentWeather: React.FC = () => {
     const theme = useTheme()
-    const { items, tempUnit, windUnit, windUnitCoefficient, visibilityUnit } = useSelector(weatherSelector);
+    const { currentWeather, tempUnit, windUnit, visibilityUnit } = useSelector(weatherSelector);
     const weatherValues = [
-        { title: 'Wind', value: `${items && Math.round(items.wind.speed * windUnitCoefficient)} ${windUnit}` },
-        { title: 'Humidity', value: `${items?.main.humidity}%` },
-        { title: 'Visibility', value: `${items && (items?.visibility / 1000).toFixed(0)} ${visibilityUnit}` },
-        { title: 'Pressure', value: `${items?.main.pressure} mb` },
-        { title: 'Dew Point', value: `${items && calculateDewPoint(items.main.temp, items.main.humidity)}°${tempUnit}` },
+        { title: 'Wind', value: `${currentWeather?.currentConditions.windspeed} ${windUnit}` },
+        { title: 'Humidity', value: `${currentWeather?.currentConditions.humidity.toFixed(0)}%` },
+        { title: 'Visibility', value: `${currentWeather?.days[0].visibility.toFixed(0)} ${visibilityUnit}` },
+        { title: 'Pressure', value: `${currentWeather?.currentConditions.pressure.toFixed(0)} mb` },
+        { title: 'Dew Point', value: `${currentWeather?.currentConditions.dew.toFixed(0)}°${tempUnit}` },
     ]
-    console.log(items);
+
     return (
         <div className={styles.currentWeather}>
             <img className={styles.currentWeather__image} src={SunCloudsImg} alt="" />
@@ -38,22 +38,22 @@ const CurrentWeather: React.FC = () => {
                         Current Weather
                     </Typography>
                     <Typography textTransform='uppercase' variant='h5'>
-                        {items?.sys.country}, {items?.name} - {format12Hours(new Date())}
+                        {currentWeather?.resolvedAddress} - {format12Hours(new Date())}
                     </Typography>
                 </Stack>
                 <Stack direction='row' alignItems='center' spacing='32px'>
                     <Stack direction='row' alignItems='center' spacing='24px'>
-                        {items?.weather && <WeatherIcon condition={items.weather[0].main} />}
+                        {currentWeather && <WeatherIcon condition={currentWeather.currentConditions.icon} />}
                         <Typography variant='h3' width='240px'>
-                            {items?.main && Math.round(items.main.temp)}°{tempUnit}
+                            {currentWeather && Math.round(currentWeather.currentConditions.temp)}°{tempUnit}
                         </Typography>
                     </Stack>
                     <Stack direction='column' spacing='8px' width='100%'>
                         <Typography variant='h4' textTransform='capitalize'>
-                            {items?.weather[0].main}
+                            {currentWeather?.currentConditions.conditions}
                         </Typography>
                         <Typography fontSize='24px'>
-                            Feels like {items?.main && Math.round(items.main.feels_like)}°{tempUnit}
+                            Feels like {currentWeather && Math.round(currentWeather.currentConditions.feelslike)}°{tempUnit}
                         </Typography>
                     </Stack>
                 </Stack>

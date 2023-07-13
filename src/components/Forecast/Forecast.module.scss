@@ -1,0 +1,12 @@
+.forecast {
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.25);
+
+    &__tablist {
+        padding: 8px 32px 0 32px;
+    }
+
+    &__tabpanel {
+        padding: 32px;
+    }
+}

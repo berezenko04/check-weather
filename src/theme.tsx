@@ -40,6 +40,31 @@ export const theme = createTheme({
                     color: theme.palette.secondary.main,
                 }),
             }
+        },
+        MuiAutocomplete: {
+            styleOverrides: {
+                root: ({ }) => ({
+                    '.css-113ntv0-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator': {
+                        color: theme.palette.secondary.main,
+                    },
+                }),
+            }
+        },
+        MuiTab: {
+            styleOverrides: {
+                root: ({ }) => ({
+                    color: theme.palette.secondary.light
+                }),
+            }
+        },
+        MuiTabs: {
+            styleOverrides: {
+                root: ({ }) => ({
+                    '.MuiTabs-indicator': {
+                        backgroundColor: theme.palette.secondary.main
+                    }
+                }),
+            }
         }
     }
 })

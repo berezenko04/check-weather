@@ -1,42 +1,40 @@
-import { WeatherIconProps } from "@/components/WeatherIcon";
-
 export interface WeatherSliceState {
-    items: WeatherItem | null;
+    currentWeather: WeatherItem | null;
     status: Status.LOADING | Status.ERROR | Status.SUCCESS;
     units: 'metric' | 'imperial';
     tempUnit: 'C' | 'F';
     windUnit: 'km/h' | 'mph';
-    windUnitCoefficient: 3.6 | 1;
     visibilityUnit: 'km' | 'miles'
 }
 
 export interface WeatherItem {
-    weather: WeatherSecondItem[];
-    main: {
+    resolvedAddress: string;
+    days: {
         temp: number;
-        feels_like: number;
+        tempmin: number;
+        tempmax: number;
         humidity: number;
+        conditions: string;
+        icon: string;
+        feelslike: number;
+        windspeed: number;
         pressure: number;
-        temp_min: number;
-        temp_max: number;
-    };
-    name: string;
-    visibility: number;
-    wind: {
-        speed: number;
-    };
-    sys: {
-        sunrise: number;
-        sunset: number;
-        country: string;
-    };
+        visibility: number;
+        dew: number;
+    }[];
+    currentConditions: {
+        temp: number;
+        humidity: number;
+        conditions: string;
+        icon: string;
+        feelslike: number;
+        windspeed: number;
+        pressure: number;
+        visibility: number;
+        dew: number;
+    }
 }
 
-type WeatherSecondItem = {
-    main: string;
-    description: string;
-    icon: string;
-}
 
 export enum Status {
     LOADING = 'loading',

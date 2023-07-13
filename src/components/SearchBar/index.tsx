@@ -1,11 +1,11 @@
 import * as React from 'react';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { Grid, Typography, TextField, Box, Autocomplete } from '@mui/material';
+import { LocationOn, Search } from '@mui/icons-material';
+import { Grid, Typography, TextField, Box, Autocomplete, InputAdornment } from '@mui/material';
 import parse from 'autosuggest-highlight/parse';
 import { debounce } from '@mui/material/utils';
 import { useAppDispatch } from '@/redux/store';
-import { fetchWeather } from '@/redux/weather/asyncActions';
-import countriesList from 'countries-list';
+import { fetchCurrentWeather } from '@/redux/weather/asyncActions';
+import { getCountryCodeAPI } from '@/API/weatherService';
 
 const GOOGLE_MAPS_API_KEY = 'AIzaSyCYYb9ZtSS19QpJ7fvsU-Tm-x_o9rKIkzc';
 
@@ -35,7 +35,7 @@ interface StructuredFormatting {
 interface PlaceType {
     description: string;
     structured_formatting: StructuredFormatting;
-    types: string[]; // Добавлено свойство types
+    types: string[];
 }
 
 interface CityInfo {
@@ -97,12 +97,9 @@ export default function GoogleMaps() {
                 }
 
                 if (results) {
-                    // Фильтрация только городов
                     newOptions = results.filter((result) =>
                         result.types.includes('locality')
                     );
-
-                    // Обновление списка опций
                     setOptions(newOptions);
                 }
             }
@@ -114,18 +111,19 @@ export default function GoogleMaps() {
     }, [value, inputValue, fetch]);
 
 
-    const extractCityInfo = (option: PlaceType): CityInfo => {
-        const cityName = option.description.split(',')[0].trim();
-        const countryCode = getCountryCode(option.structured_formatting.secondary_text);
-        return { cityname: cityName, countryCode: countryCode };
-    };
+    // const extractCityInfo = async (option: PlaceType): Promise<CityInfo> => {
+    //     const cityName = option.structured_formatting.main_text;
+    //     const countryCode = await getCountryCode(option.structured_formatting.secondary_text);
+    //     return { cityname: cityName, countryCode: countryCode };
+    // };
 
-    const getCountryCode = (countryName: string): string => {
-        const country = Object.values(countriesList).find(
-            (c) => c.name === countryName
-        );
-        return country ? country['iso2'] : 'CA';
-    };
+    // const getCountryCode = async (countryName: string) => {
+    //     const country = countryName.split(', ').pop();
+    //     const data = await getCountryCodeAPI(country);
+    //     if (data) {
+    //         return data[0].alpha2Code;
+    //     }
+    // };
 
     return (
         <Autocomplete
@@ -144,10 +142,10 @@ export default function GoogleMaps() {
             onChange={async (event: any, newValue: PlaceType | null) => {
                 setOptions(newValue ? [newValue, ...options] : options);
                 setValue(newValue);
-                const { cityname, countryCode } = extractCityInfo(newValue);
+                // const { cityname, countryCode } = await extractCityInfo(newValue);
 
                 try {
-                    dispatch(fetchWeather({ cityname, countryCode }));
+                    dispatch(fetchCurrentWeather({ cityname: newValue?.description }));
                 } catch (error) {
                     console.error('Ошибка геокодирования:', error);
                 }
@@ -156,7 +154,10 @@ export default function GoogleMaps() {
                 setInputValue(newInputValue);
             }}
             renderInput={(params) => (
-                <TextField {...params} label="Add a location" fullWidth />
+                <TextField {...params}
+                    label="Location"
+                    fullWidth
+                />
             )}
             renderOption={(props, option) => {
                 const matches =
@@ -172,9 +173,9 @@ export default function GoogleMaps() {
 
                 return (
                     <li {...props}>
-                        <Grid container alignItems="center">
+                        <Grid container alignItems="center" color={''}>
                             <Grid item sx={{ display: 'flex', width: 44 }}>
-                                <LocationOnIcon sx={{ color: 'text.secondary' }} />
+                                <LocationOn sx={{ color: 'text.primary' }} />
                             </Grid>
                             <Grid
                                 item
