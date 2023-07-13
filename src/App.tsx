@@ -21,7 +21,6 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchWeather({
       units,
-      cityname: 'Velbivka'
     }))
   }, [units])
 

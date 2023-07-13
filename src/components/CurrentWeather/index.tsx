@@ -12,17 +12,19 @@ import { calculateDewPoint } from '@/utils/calculateDewPoint'
 //icons
 import SunCloudsImg from '/WeatherImages/sun-clouds.jpg'
 
+//components
+import WeatherIcon from '../WeatherIcon'
+
 //redux
 import { weatherSelector } from '@/redux/weather/selectors'
-import WeatherIcon from '../WeatherIcon'
 
 const CurrentWeather: React.FC = () => {
     const theme = useTheme()
-    const { items, units, tempUnit, windUnit, windUnitCoefficient, visibilityUnit } = useSelector(weatherSelector);
+    const { items, tempUnit, windUnit, windUnitCoefficient, visibilityUnit } = useSelector(weatherSelector);
     const weatherValues = [
         { title: 'Wind', value: `${items && Math.round(items.wind.speed * windUnitCoefficient)} ${windUnit}` },
         { title: 'Humidity', value: `${items?.main.humidity}%` },
-        { title: 'Visibility', value: `${items && items?.visibility / 1000} ${visibilityUnit}` },
+        { title: 'Visibility', value: `${items && (items?.visibility / 1000).toFixed(0)} ${visibilityUnit}` },
         { title: 'Pressure', value: `${items?.main.pressure} mb` },
         { title: 'Dew Point', value: `${items && calculateDewPoint(items.main.temp, items.main.humidity)}°${tempUnit}` },
     ]
