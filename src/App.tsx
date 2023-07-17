@@ -9,6 +9,7 @@ import './scss/main.scss'
 import Navbar from './components/Navbar'
 import CurrentWeather from './components/CurrentWeather'
 import Forecast from './components/Forecast'
+import Footer from './components/Footer'
 
 //redux
 import { fetchCurrentWeather } from './redux/weather/asyncActions'
@@ -38,6 +39,7 @@ const App = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

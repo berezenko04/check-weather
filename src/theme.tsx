@@ -1,3 +1,4 @@
+import { Padding } from "@mui/icons-material";
 import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
@@ -105,5 +106,29 @@ export const theme = createTheme({
                 }),
             }
         },
+        MuiLink: {
+            styleOverrides: {
+                root: ({ }) => ({
+                    color: theme.palette.secondary.main,
+                    textDecoration: 'none',
+                    fontFamily: 'Roboto, Helvetica, Arial, sans-serif'
+                }),
+            }
+        },
+        MuiListItem: {
+            styleOverrides: {
+                root: ({ }) => ({
+                    padding: '0 !important',
+                }),
+            }
+        },
+
+        MuiList: {
+            styleOverrides: {
+                root: ({ }) => ({
+                    padding: '0 !important',
+                }),
+            }
+        }
     }
 })
