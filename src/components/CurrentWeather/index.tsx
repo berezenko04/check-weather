@@ -16,6 +16,7 @@ import WeatherIcon from '../WeatherIcon'
 
 //redux
 import { weatherSelector } from '@/redux/weather/selectors'
+import WeatherImage from '../WeatherImage'
 
 
 const CurrentWeather: React.FC = () => {
@@ -31,7 +32,10 @@ const CurrentWeather: React.FC = () => {
 
     return (
         <div className={styles.currentWeather}>
-            <img className={styles.currentWeather__image} src={SunCloudsImg} alt="" />
+            {currentWeather &&
+                <WeatherImage
+                    condition={currentWeather.currentConditions.icon}
+                />}
             <Stack direction='column' spacing='32px'>
                 <Stack direction='column' spacing='8px'>
                     <Typography textTransform='uppercase' variant='h4'>

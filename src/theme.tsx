@@ -30,8 +30,42 @@ export const theme = createTheme({
         MuiTextField: {
             styleOverrides: {
                 root: ({ }) => ({
-                    color: theme.palette.secondary.main,
-                }),
+                    borderRadius: '4px',
+                    border: 'none',
+                    fontSize: '14px',
+                    textTransform: 'none',
+                    fontWeight: 400,
+                    boxShadow: 'none',
+                    backgroundColor: 'rgba(0, 0, 0, 0.06)',
+                    color: '#ffffff !important',
+                    '& .MuiInputBase-input': {
+                        color: '#ffffff !important',
+                        backgroundColor: 'transparent',
+                        padding: '15px'
+                    },
+                    '& .MuiOutlinedInput-notchedOutline': {
+                        border: 'none'
+                    },
+                    '& .css-1kun5ge-MuiInputBase-root-MuiOutlinedInput-root': {
+                        padding: 0
+                    },
+                    '& .MuiInputBase-formControl': {
+                        overflow: 'hidden !important'
+                    },
+                    '& .MuiFormLabel-root': {
+                        color: '#ffffff',
+                        background: 'transparent',
+                        '&.Mui-focused': {
+                            color: '#ffffff !important'
+                        }
+                    },
+                    '& .MuiSvgIcon-root': {
+                        fill: '#ffffff'
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#a0a0a0 !important'
+                    }
+                })
             }
         },
         MuiTypography: {
@@ -43,11 +77,16 @@ export const theme = createTheme({
         },
         MuiAutocomplete: {
             styleOverrides: {
+                paper: {
+                    backgroundColor: '#1c5288',
+                    borderRadius: 0
+                },
                 root: ({ }) => ({
-                    '.css-113ntv0-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator': {
-                        color: theme.palette.secondary.main,
-                    },
+                    '& .MuiAutocomplete-option': {
+                        color: 'red'
+                    }
                 }),
+
             }
         },
         MuiTab: {
@@ -65,6 +104,6 @@ export const theme = createTheme({
                     }
                 }),
             }
-        }
+        },
     }
 })

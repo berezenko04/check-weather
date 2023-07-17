@@ -3,18 +3,25 @@ import { Box, Stack, Typography, useTheme } from "@mui/material"
 //components
 import WeatherIcon from "../WeatherIcon"
 
+//utils
+import { formatDate } from "@/utils/formateDate"
+
 type WeatherDayProps = {
-    active: boolean
+    active: boolean,
+    datetime: string,
+    tempmin: number,
+    tempmax: number,
+    icon: string,
+    index: number
 }
 
-const WeatherDay: React.FC<WeatherDayProps> = ({ active }) => {
+const WeatherDay: React.FC<WeatherDayProps> = ({ active, datetime, tempmin, tempmax, icon, index }) => {
     const theme = useTheme();
     const backgroundOpacity = active ? 0.25 : 0.10;
-    console.log(active);
     return (
         <Box
             padding='32px'
-            sx={{ backgroundColor: `rgba(255, 255, 255, ${backgroundOpacity})` }}
+            sx={{ backgroundColor: `rgba(255, 255, 255, ${backgroundOpacity})`, userSelect: 'none' }}
             borderRadius='8px'
         >
             <Stack direction='column' spacing='24px'>
@@ -22,17 +29,19 @@ const WeatherDay: React.FC<WeatherDayProps> = ({ active }) => {
                     variant="h5"
                     color={active ? theme.palette.secondary.main : theme.palette.secondary.light}
                 >
-                    Wed 13
+                    {index === 0 ? 'Today' : formatDate(datetime)}
                 </Typography>
-                <Stack direction='row' alignItems='center' spacing='16px'>
-                    <WeatherIcon condition='rain' />
-                    <Stack direction='column'>
-                        <Typography variant="h5">22°C</Typography>
-                        <Typography variant="h5" fontWeight='400 !important'>11°C</Typography>
+                <Stack direction='row' alignItems='center' spacing='32px'>
+                    <Stack direction='row' alignItems='center' spacing='16px'>
+                        <WeatherIcon condition={icon} />
+                        <Stack direction='column'>
+                            <Typography variant="h5">{tempmax.toFixed(0)}°C</Typography>
+                            <Typography variant="h5" fontWeight='400 !important'>{tempmin.toFixed(0)}°C</Typography>
+                        </Stack>
                     </Stack>
                 </Stack>
             </Stack>
-        </Box>
+        </Box >
     )
 }
 

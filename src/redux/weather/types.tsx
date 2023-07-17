@@ -1,7 +1,8 @@
 export interface WeatherSliceState {
     currentWeather: WeatherItem | null;
     status: Status.LOADING | Status.ERROR | Status.SUCCESS;
-    units: 'metric' | 'imperial';
+    currentDay: number;
+    units: 'metric' | 'us';
     tempUnit: 'C' | 'F';
     windUnit: 'km/h' | 'mph';
     visibilityUnit: 'km' | 'miles'
@@ -9,30 +10,31 @@ export interface WeatherSliceState {
 
 export interface WeatherItem {
     resolvedAddress: string;
-    days: {
-        temp: number;
-        tempmin: number;
-        tempmax: number;
-        humidity: number;
-        conditions: string;
-        icon: string;
-        feelslike: number;
-        windspeed: number;
-        pressure: number;
-        visibility: number;
-        dew: number;
-    }[];
-    currentConditions: {
-        temp: number;
-        humidity: number;
-        conditions: string;
-        icon: string;
-        feelslike: number;
-        windspeed: number;
-        pressure: number;
-        visibility: number;
-        dew: number;
-    }
+    days: WeatherDay[]
+    currentConditions: WeatherCurrent
+}
+
+interface WeatherDay extends WeatherCurrent {
+    datetime: string;
+    tempmin: number;
+    tempmax: number;
+    hours: WeatherHour[]
+}
+
+interface WeatherHour extends WeatherCurrent {
+    datetime: string;
+}
+
+type WeatherCurrent = {
+    temp: number;
+    humidity: number;
+    conditions: string;
+    icon: string;
+    feelslike: number;
+    windspeed: number;
+    pressure: number;
+    visibility: number;
+    dew: number;
 }
 
 

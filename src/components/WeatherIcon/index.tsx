@@ -32,7 +32,7 @@ const WeatherIcon: React.FC<WeatherIconProps> = ({ condition }) => {
             break;
     }
 
-    return <img src={imageSrc} alt={condition} style={{ width: 64, height: 64, objectFit: 'cover' }} />;
+    return <img src={imageSrc} alt={condition} style={{ width: 64, height: 64, objectFit: 'cover', userSelect: 'none' }} />;
 };
 
 export default WeatherIcon;

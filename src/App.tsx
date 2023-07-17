@@ -9,7 +9,6 @@ import './scss/main.scss'
 import Navbar from './components/Navbar'
 import CurrentWeather from './components/CurrentWeather'
 import Forecast from './components/Forecast'
-import WeatherForecast from './components/WeatherForecast'
 
 //redux
 import { fetchCurrentWeather } from './redux/weather/asyncActions'
@@ -30,7 +29,6 @@ const App = () => {
       <main className='main'>
         <div className="container">
           <div className='main__wrapper'>
-            <WeatherForecast />
             <section>
               <CurrentWeather />
             </section>

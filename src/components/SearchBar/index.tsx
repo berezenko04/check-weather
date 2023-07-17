@@ -7,6 +7,9 @@ import { useAppDispatch } from '@/redux/store';
 import { fetchCurrentWeather } from '@/redux/weather/asyncActions';
 import { getCountryCodeAPI } from '@/API/weatherService';
 
+//styles
+import styles from './SearchBar.module.scss'
+
 const GOOGLE_MAPS_API_KEY = 'AIzaSyCYYb9ZtSS19QpJ7fvsU-Tm-x_o9rKIkzc';
 
 function loadScript(src: string, position: HTMLElement | null, id: string) {
@@ -138,6 +141,7 @@ export default function GoogleMaps() {
             includeInputInList
             filterSelectedOptions
             value={value}
+            classes={{ noOptions: styles.noOptions }}
             noOptionsText="No locations"
             onChange={async (event: any, newValue: PlaceType | null) => {
                 setOptions(newValue ? [newValue, ...options] : options);
@@ -157,6 +161,7 @@ export default function GoogleMaps() {
                 <TextField {...params}
                     label="Location"
                     fullWidth
+                    variant='filled'
                 />
             )}
             renderOption={(props, option) => {
@@ -173,10 +178,7 @@ export default function GoogleMaps() {
 
                 return (
                     <li {...props}>
-                        <Grid container alignItems="center" color={''}>
-                            <Grid item sx={{ display: 'flex', width: 44 }}>
-                                <LocationOn sx={{ color: 'text.primary' }} />
-                            </Grid>
+                        <Grid container alignItems="center">
                             <Grid
                                 item
                                 sx={{ width: 'calc(100% - 44px)', wordWrap: 'break-word' }}
@@ -187,12 +189,13 @@ export default function GoogleMaps() {
                                         component="span"
                                         sx={{
                                             fontWeight: part.highlight ? 'bold' : 'regular',
+                                            color: '#FFFFFF'
                                         }}
                                     >
                                         {part.text}
                                     </Box>
                                 ))}
-                                <Typography variant="body2" color="text.secondary">
+                                <Typography variant="body2" color="secondary">
                                     {option.structured_formatting.secondary_text}
                                 </Typography>
                             </Grid>

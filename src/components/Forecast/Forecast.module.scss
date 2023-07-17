@@ -8,5 +8,9 @@
 
     &__tabpanel {
         padding: 32px;
+
+        &__hourly {
+            padding: 32px 40px !important;
+        }
     }
 }

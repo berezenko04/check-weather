@@ -1,53 +1,42 @@
 type WeatherImageProps = {
-    condition:
-    | 'clear sky'
-    | 'few clouds'
-    | 'scattered clouds'
-    | 'broken clouds'
-    | 'shower rain'
-    | 'rain'
-    | 'thunderstorm'
-    | 'snow'
-    | 'mist';
+    condition: string
 };
 
 const WeatherImage: React.FC<WeatherImageProps> = ({ condition }) => {
-    let imageSrc = '../../assets/img/';
+    let imageSrc = '/WeatherImages/';
 
-    switch (condition) {
-        case 'clear sky':
-            imageSrc += 'clear.jpg';
-            break;
-        case 'few clouds':
-            imageSrc += 'few-clouds.jpg';
-            break;
-        case 'scattered clouds':
-            imageSrc += 'scattered-clouds.jpg';
-            break;
-        case 'broken clouds':
-            imageSrc += 'broken-clouds.jpg';
-            break;
-        case 'shower rain':
-            imageSrc += 'shower-rain.jpg';
-            break;
+    switch (condition.toLowerCase()) {
         case 'rain':
-            imageSrc += 'rain.jpg';
+            imageSrc += 'rain.png';
             break;
-        case 'thunderstorm':
-            imageSrc += 'thunderstorm.jpg';
+        case 'cloudy':
+            imageSrc += 'cloudy.jpg'
             break;
-        case 'snow':
-            imageSrc += 'snow.jpg';
+        // case 'hail':
+        //     imageSrc += 'hail.png'
+        //     break;
+        // case 'fog':
+        //     imageSrc += 'fog.png'
+        //     break;
+        case 'partly-cloudy-day':
+            imageSrc += 'partly-cloudy-day.jpg'
             break;
-        case 'mist':
-            imageSrc += 'mist.jpg';
+        case 'partly-cloudy-night':
+            imageSrc += 'partly-cloudy-night.jpg'
             break;
-        default:
-            imageSrc += 'default.jpg';
+        case 'clear-day':
+            imageSrc += 'clear-day.jpg'
+            break;
+        case 'clear-night':
+            imageSrc += 'clear-night.jpg'
             break;
     }
 
-    return <img src={imageSrc} alt="" />;
+    return <img
+        src={imageSrc}
+        alt=""
+        style={{ objectFit: 'cover', objectPosition: 'center', position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}
+    />;
 };
 
 export default WeatherImage;

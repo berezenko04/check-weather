@@ -19,6 +19,15 @@
     }
 }
 
+.swiper {
+    width: 100% !important;
+    position: relative !important;
+
+    &-slide {
+        cursor: pointer !important;
+    }
+}
+
 h1,
 h2,
 h3,

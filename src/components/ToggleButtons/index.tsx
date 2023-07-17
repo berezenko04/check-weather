@@ -4,7 +4,7 @@ import { ToggleButtonGroup, ToggleButton } from "@mui/material"
 import { useState } from "react"
 
 
-type TUnits = 'metric' | 'imperial';
+type TUnits = 'metric' | 'us';
 
 const ToggleButtons: React.FC = () => {
     const [unit, setUnit] = useState<TUnits>('metric');
@@ -29,7 +29,7 @@ const ToggleButtons: React.FC = () => {
             exclusive
         >
             <ToggleButton value={'metric'}>C°</ToggleButton>
-            <ToggleButton value={'imperial'}>F°</ToggleButton>
+            <ToggleButton value={'us'}>F°</ToggleButton>
         </ToggleButtonGroup>
     )
 }

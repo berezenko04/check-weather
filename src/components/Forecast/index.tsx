@@ -7,6 +7,8 @@ import styles from './Forecast.module.scss'
 
 //components
 import Summary from '../Summary'
+import WeatherForecast from '../DaysForecast'
+import HourlyForecast from '../HourlyForecast'
 
 
 const Forecast: React.FC = () => {
@@ -19,8 +21,9 @@ const Forecast: React.FC = () => {
     return (
         <Stack direction='column' spacing='32px'>
             <Typography textTransform='uppercase' variant='h4'>
-                10 Days Forecast
+                7 Days Forecast
             </Typography>
+            <WeatherForecast />
             <Box className={styles.forecast}>
                 <TabContext value={value}>
                     <Box sx={{ borderBottom: 1, borderColor: 'rgba(255, 255, 255, 0.40)' }}>
@@ -31,7 +34,12 @@ const Forecast: React.FC = () => {
                         </TabList>
                     </Box>
                     <TabPanel value="1" className={styles.forecast__tabpanel}><Summary /></TabPanel>
-                    <TabPanel value="2" className={styles.forecast__tabpanel}>Item Two</TabPanel>
+                    <TabPanel
+                        value="2"
+                        className={`${styles.forecast__tabpanel} ${styles.forecast__tabpanel__hourly}`}
+                    >
+                        <HourlyForecast />
+                    </TabPanel>
                     <TabPanel value="3" className={styles.forecast__tabpanel}>Item Three</TabPanel>
                 </TabContext>
             </Box>

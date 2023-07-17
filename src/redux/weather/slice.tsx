@@ -4,6 +4,7 @@ import { Status, WeatherItem, WeatherSliceState } from './types'
 
 const initialState: WeatherSliceState = {
     currentWeather: null,
+    currentDay: 0,
     status: Status.LOADING,
     units: 'metric',
     tempUnit: 'C',
@@ -15,7 +16,7 @@ export const WeatherSlice = createSlice({
     name: 'weather',
     initialState,
     reducers: {
-        setUnits(state, action: PayloadAction<'metric' | 'imperial'>) {
+        setUnits(state, action: PayloadAction<'metric' | 'us'>) {
             state.units = action.payload;
             if (state.units === 'metric') {
                 state.tempUnit = 'C';
@@ -26,6 +27,9 @@ export const WeatherSlice = createSlice({
                 state.windUnit = 'mph';
                 state.visibilityUnit = 'miles'
             }
+        },
+        setCurrentDay(state, action: PayloadAction<number>) {
+            state.currentDay = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -46,6 +50,6 @@ export const WeatherSlice = createSlice({
     }
 })
 
-export const { setUnits } = WeatherSlice.actions;
+export const { setUnits, setCurrentDay } = WeatherSlice.actions;
 
 export default WeatherSlice.reducer;
