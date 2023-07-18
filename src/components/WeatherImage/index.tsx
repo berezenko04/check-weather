@@ -7,7 +7,7 @@ const WeatherImage: React.FC<WeatherImageProps> = ({ condition }) => {
 
     switch (condition.toLowerCase()) {
         case 'rain':
-            imageSrc += 'rain.png';
+            imageSrc += 'rain.jpg';
             break;
         case 'cloudy':
             imageSrc += 'cloudy.jpg'

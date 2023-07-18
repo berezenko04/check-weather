@@ -5,7 +5,8 @@ export interface WeatherSliceState {
     units: 'metric' | 'us';
     tempUnit: 'C' | 'F';
     windUnit: 'km/h' | 'mph';
-    visibilityUnit: 'km' | 'miles'
+    visibilityUnit: 'km' | 'miles';
+    lastQuery: string
 }
 
 export interface WeatherItem {

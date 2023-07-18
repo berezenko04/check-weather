@@ -9,7 +9,8 @@ const initialState: WeatherSliceState = {
     units: 'metric',
     tempUnit: 'C',
     windUnit: 'km/h',
-    visibilityUnit: 'km'
+    visibilityUnit: 'km',
+    lastQuery: 'Kyiv, UA'
 }
 
 export const WeatherSlice = createSlice({
@@ -30,6 +31,9 @@ export const WeatherSlice = createSlice({
         },
         setCurrentDay(state, action: PayloadAction<number>) {
             state.currentDay = action.payload;
+        },
+        setLastQuery(state, action: PayloadAction<string>) {
+            state.lastQuery = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -50,6 +54,6 @@ export const WeatherSlice = createSlice({
     }
 })
 
-export const { setUnits, setCurrentDay } = WeatherSlice.actions;
+export const { setUnits, setCurrentDay, setLastQuery } = WeatherSlice.actions;
 
 export default WeatherSlice.reducer;

@@ -1,14 +1,20 @@
 import * as React from 'react';
-import { LocationOn, Search } from '@mui/icons-material';
+import { useAppDispatch } from '@/redux/store';
 import { Grid, Typography, TextField, Box, Autocomplete, InputAdornment } from '@mui/material';
 import parse from 'autosuggest-highlight/parse';
 import { debounce } from '@mui/material/utils';
-import { useAppDispatch } from '@/redux/store';
-import { fetchCurrentWeather } from '@/redux/weather/asyncActions';
+import { useSelector } from 'react-redux';
+
+//service
 import { getCountryCodeAPI } from '@/API/weatherService';
 
 //styles
 import styles from './SearchBar.module.scss'
+
+//redux
+import { setLastQuery } from '@/redux/weather/slice';
+import { weatherSelector } from '@/redux/weather/selectors';
+import { fetchCurrentWeather } from '@/redux/weather/asyncActions';
 
 const GOOGLE_MAPS_API_KEY = 'AIzaSyCYYb9ZtSS19QpJ7fvsU-Tm-x_o9rKIkzc';
 
@@ -41,17 +47,13 @@ interface PlaceType {
     types: string[];
 }
 
-interface CityInfo {
-    cityname: string;
-    countryCode: string;
-}
-
 export default function GoogleMaps() {
     const [value, setValue] = React.useState<PlaceType | null>(null);
     const [inputValue, setInputValue] = React.useState('');
     const [options, setOptions] = React.useState<readonly PlaceType[]>([]);
     const loaded = React.useRef(false);
     const dispatch = useAppDispatch();
+    const { units } = useSelector(weatherSelector);
 
     if (typeof window !== 'undefined' && !loaded.current) {
         if (!document.querySelector('#google-maps')) {
@@ -114,20 +116,6 @@ export default function GoogleMaps() {
     }, [value, inputValue, fetch]);
 
 
-    // const extractCityInfo = async (option: PlaceType): Promise<CityInfo> => {
-    //     const cityName = option.structured_formatting.main_text;
-    //     const countryCode = await getCountryCode(option.structured_formatting.secondary_text);
-    //     return { cityname: cityName, countryCode: countryCode };
-    // };
-
-    // const getCountryCode = async (countryName: string) => {
-    //     const country = countryName.split(', ').pop();
-    //     const data = await getCountryCodeAPI(country);
-    //     if (data) {
-    //         return data[0].alpha2Code;
-    //     }
-    // };
-
     return (
         <Autocomplete
             id="google-map-demo"
@@ -146,12 +134,14 @@ export default function GoogleMaps() {
             onChange={async (event: any, newValue: PlaceType | null) => {
                 setOptions(newValue ? [newValue, ...options] : options);
                 setValue(newValue);
-                // const { cityname, countryCode } = await extractCityInfo(newValue);
-
-                try {
-                    dispatch(fetchCurrentWeather({ cityname: newValue?.description }));
-                } catch (error) {
-                    console.error('Ошибка геокодирования:', error);
+                const cityname = newValue?.description || '';
+                if (newValue) {
+                    try {
+                        dispatch(fetchCurrentWeather({ cityname, units }));
+                        dispatch(setLastQuery(cityname));
+                    } catch (error) {
+                        console.error('Ошибка геокодирования:', error);
+                    }
                 }
             }}
             onInputChange={(event, newInputValue) => {

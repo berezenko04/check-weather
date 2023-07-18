@@ -18,11 +18,12 @@ import { weatherSelector } from './redux/weather/selectors'
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const { units } = useSelector(weatherSelector);
+  const { units, lastQuery } = useSelector(weatherSelector);
 
   useEffect(() => {
-    dispatch(fetchCurrentWeather({}));
+    dispatch(fetchCurrentWeather({ units, cityname: lastQuery }));
   }, [units])
+
 
   return (
     <div className='App'>
