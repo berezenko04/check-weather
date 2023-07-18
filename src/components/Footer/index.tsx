@@ -1,4 +1,4 @@
-import { Grid, Link, List, ListItem, Stack, Typography } from '@mui/material'
+import { Link, List, ListItem, Stack, Typography } from '@mui/material'
 
 //styles
 import styles from './Footer.module.scss'

@@ -18,6 +18,7 @@ import { weatherSelector } from '@/redux/weather/selectors';
 const HourlyForecast: React.FC = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const swiperRef = useRef<SwiperType>();
+    const nowHour = new Date().getHours();
     const { currentWeather, currentDay } = useSelector(weatherSelector);
 
     const handleSlideClick = (index: number) => {
@@ -41,7 +42,7 @@ const HourlyForecast: React.FC = () => {
                 }}
                 onSlideChange={(swiper) => handleSlideChange(swiper)}
             >
-                {currentWeather?.days[currentDay].hours.map((hour, index) => (
+                {currentWeather?.days[currentDay].hours.slice(nowHour).map((hour, index) => (
                     <SwiperSlide
                         key={index}
                         onClick={() => handleSlideClick(index)}
