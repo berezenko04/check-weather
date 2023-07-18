@@ -10,6 +10,7 @@ import Navbar from './components/Navbar'
 import CurrentWeather from './components/CurrentWeather'
 import Forecast from './components/Forecast'
 import Footer from './components/Footer'
+import CurrentWeatherSkeleton from './components/Skeletons/CurrentWeatherSkeleton'
 
 //redux
 import { fetchCurrentWeather } from './redux/weather/asyncActions'
@@ -18,7 +19,7 @@ import { weatherSelector } from './redux/weather/selectors'
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const { units, lastQuery } = useSelector(weatherSelector);
+  const { units, lastQuery, status } = useSelector(weatherSelector);
 
   useEffect(() => {
     dispatch(fetchCurrentWeather({ units, cityname: lastQuery }));
@@ -32,7 +33,11 @@ const App = () => {
         <div className="container">
           <div className='main__wrapper'>
             <section>
-              <CurrentWeather />
+              {status === 'success' ?
+                <CurrentWeather />
+                :
+                <CurrentWeatherSkeleton />
+              }
             </section>
             <section>
               <Forecast />

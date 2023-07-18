@@ -15,13 +15,14 @@ import SwiperControls from '../SwiperControls';
 //redux
 import { weatherSelector } from '@/redux/weather/selectors';
 import { setCurrentDay } from '@/redux/weather/slice';
+import DaySkeleton from '../Skeletons/DaySkeleton';
 
 
 const DaysForecast: React.FC = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const dispatch = useAppDispatch();
     const swiperRef = useRef<SwiperType>();
-    const { currentWeather } = useSelector(weatherSelector);
+    const { currentWeather, status } = useSelector(weatherSelector);
 
 
     const handleSlideClick = (index: number) => {
@@ -47,14 +48,24 @@ const DaysForecast: React.FC = () => {
                 }}
                 onSlideChange={(swiper) => handleSlideChange(swiper)}
             >
-                {currentWeather?.days.map((day, index) => (
-                    <SwiperSlide
-                        key={index}
-                        onClick={() => handleSlideClick(index)}
-                    >
-                        <WeatherDay active={index === activeIndex} index={index} {...day} />
-                    </SwiperSlide>
-                ))}
+                {status === 'success' ?
+                    currentWeather?.days.map((day, index) => (
+                        <SwiperSlide
+                            key={index}
+                            onClick={() => handleSlideClick(index)}
+                        >
+                            <WeatherDay active={index === activeIndex} index={index} {...day} />
+                        </SwiperSlide>
+                    ))
+                    :
+                    [...Array(4)].map((_, index) => (
+                        <SwiperSlide
+                            key={index}
+                        >
+                            <DaySkeleton key={index} />
+                        </SwiperSlide>
+                    ))
+                }
             </Swiper>
         </div>
     )

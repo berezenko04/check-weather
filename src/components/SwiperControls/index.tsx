@@ -12,21 +12,34 @@ type SwiperControlsProps = {
 
 
 const SwiperControls: React.FC<SwiperControlsProps> = ({ swiperRef }) => {
+    const handlePrevClick = () => {
+        if (swiperRef.current) {
+            swiperRef.current.slidePrev();
+        }
+    }
+
+    const handleNextClick = () => {
+        if (swiperRef.current) {
+            swiperRef.current.slideNext();
+        }
+    }
+
+
     return (
         <>
             <IconButton
-                onClick={() => swiperRef.current?.slidePrev()}
+                onClick={handlePrevClick}
                 className={styles.prev}
                 size='large'
-                disabled={swiperRef.current?.isBeginning!}
+                disabled={!swiperRef.current || swiperRef.current?.isBeginning!}
             >
                 <KeyboardArrowLeft color='secondary' />
             </IconButton>
             <IconButton
-                onClick={() => swiperRef.current?.slideNext()}
+                onClick={handleNextClick}
                 className={styles.next}
                 size='large'
-                disabled={swiperRef.current?.isEnd!}
+                disabled={!swiperRef.current || swiperRef.current?.isEnd!}
             >
                 <KeyboardArrowRight color='secondary' />
             </IconButton>

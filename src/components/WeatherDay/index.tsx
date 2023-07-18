@@ -46,7 +46,7 @@ const WeatherDay: React.FC<WeatherDayProps> = ({ active, datetime, tempmin, temp
                     </Stack>
                 </Stack>
             </Stack>
-        </Box >
+        </Box>
     )
 }
 

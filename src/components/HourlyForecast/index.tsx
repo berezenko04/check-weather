@@ -39,10 +39,11 @@ const HourlyForecast: React.FC = () => {
                 modules={[Navigation]}
                 onBeforeInit={(swiper) => {
                     swiperRef.current = swiper;
+                    swiperRef.current.slideTo(nowHour);
                 }}
                 onSlideChange={(swiper) => handleSlideChange(swiper)}
             >
-                {currentWeather?.days[currentDay].hours.slice(nowHour).map((hour, index) => (
+                {currentWeather?.days[currentDay].hours.map((hour, index) => (
                     <SwiperSlide
                         key={index}
                         onClick={() => handleSlideClick(index)}
