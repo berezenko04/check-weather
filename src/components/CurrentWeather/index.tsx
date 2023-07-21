@@ -1,4 +1,4 @@
-import { Stack, Typography } from '@mui/material'
+import { Grid, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useSelector } from 'react-redux'
 
@@ -45,14 +45,18 @@ const CurrentWeather: React.FC = () => {
                         {currentWeather?.resolvedAddress} - {format12Hours(new Date())}
                     </Typography>
                 </Stack>
-                <Stack direction='row' alignItems='center' spacing='32px'>
-                    <Stack direction='row' alignItems='center' spacing='24px'>
+                <Stack
+                    direction={{ xs: 'column', md: 'row' }}
+                    alignItems={{ xs: 'flex-start', md: 'center' }}
+                    spacing='32px'
+                >
+                    <Stack direction='row' alignItems='center' spacing='24px' >
                         {currentWeather && <WeatherIcon condition={currentWeather.currentConditions.icon} />}
                         <Typography variant='h3' width='240px'>
                             {currentWeather && Math.round(currentWeather.currentConditions.temp)}°{tempUnit}
                         </Typography>
                     </Stack>
-                    <Stack direction='column' spacing='8px' width='100%'>
+                    <Stack direction='column' spacing='8px'>
                         <Typography variant='h4' textTransform='capitalize'>
                             {currentWeather?.currentConditions.conditions}
                         </Typography>
@@ -61,14 +65,14 @@ const CurrentWeather: React.FC = () => {
                         </Typography>
                     </Stack>
                 </Stack>
-                <Stack direction='row' spacing='32px'>
+                <div className={styles.currentWeather__info}>
                     {weatherValues.map((item, index) => (
                         <Stack direction='column' spacing='8px' width='100%' key={index}>
                             <Typography color={theme.palette.secondary.light}>{item.title}</Typography>
                             <Typography variant='h5'>{item.value}</Typography>
                         </Stack>
                     ))}
-                </Stack>
+                </div>
             </Stack>
         </div>
     )

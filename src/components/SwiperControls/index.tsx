@@ -24,7 +24,6 @@ const SwiperControls: React.FC<SwiperControlsProps> = ({ swiperRef }) => {
         }
     }
 
-
     return (
         <>
             <IconButton

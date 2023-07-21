@@ -1,6 +1,9 @@
 import { Stack, Typography, useTheme } from '@mui/material'
 import { useSelector } from 'react-redux'
 
+//styles
+import styles from './Summary.module.scss'
+
 //components
 import WeatherIcon from '../WeatherIcon'
 
@@ -20,37 +23,43 @@ const Summary: React.FC = () => {
     ]
 
     return (
-        <Stack direction='column' spacing='32px'>
-            <Stack direction='row' alignItems='center' spacing='32px'>
-                <Stack direction='row' alignItems='center' spacing='24px'>
-                    {currentWeather && <WeatherIcon condition={currentWeather.days[currentDay].icon} />}
-                    <Stack direction='column' spacing='8px' width='240px'>
-                        <Typography variant='h3'>
-                            {currentWeather && Math.round(currentWeather.days[currentDay].tempmax)}°{tempUnit}
+        <div className={styles.summary}>
+            <Stack direction='column' spacing='32px'>
+                <Stack
+                    direction={{ xs: 'column', md: 'row' }}
+                    alignItems={{ xs: 'flex-start', md: 'center' }}
+                    spacing='32px'
+                >
+                    <Stack direction='row' alignItems='center' spacing='24px'>
+                        {currentWeather && <WeatherIcon condition={currentWeather.days[currentDay].icon} />}
+                        <Stack direction='column' spacing='8px' width='240px'>
+                            <Typography variant='h3'>
+                                {currentWeather && Math.round(currentWeather.days[currentDay].tempmax)}°{tempUnit}
+                            </Typography>
+                            <Typography variant='h3' fontWeight='400 !important'>
+                                {currentWeather && Math.round(currentWeather.days[currentDay].tempmin)}°{tempUnit}
+                            </Typography>
+                        </Stack>
+                    </Stack>
+                    <Stack direction='column' spacing='8px' width='100%'>
+                        <Typography variant='h4' textTransform='capitalize'>
+                            {currentWeather?.days[currentDay].conditions}
                         </Typography>
-                        <Typography variant='h3' fontWeight='400 !important'>
-                            {currentWeather && Math.round(currentWeather.days[currentDay].tempmin)}°{tempUnit}
+                        <Typography fontSize='24px'>
+                            Feels like {currentWeather && Math.round(currentWeather.days[currentDay].feelslike)}°{tempUnit}
                         </Typography>
                     </Stack>
                 </Stack>
-                <Stack direction='column' spacing='8px' width='100%'>
-                    <Typography variant='h4' textTransform='capitalize'>
-                        {currentWeather?.days[currentDay].conditions}
-                    </Typography>
-                    <Typography fontSize='24px'>
-                        Feels like {currentWeather && Math.round(currentWeather.days[currentDay].feelslike)}°{tempUnit}
-                    </Typography>
-                </Stack>
+                <div className={styles.summary__info}>
+                    {weatherValues.map((item, index) => (
+                        <Stack direction='column' spacing='8px' width='100%' key={index}>
+                            <Typography color={theme.palette.secondary.light}>{item.title}</Typography>
+                            <Typography variant='h5'>{item.value}</Typography>
+                        </Stack>
+                    ))}
+                </div>
             </Stack>
-            <Stack direction='row' spacing='32px'>
-                {weatherValues.map((item, index) => (
-                    <Stack direction='column' spacing='8px' width='100%' key={index}>
-                        <Typography color={theme.palette.secondary.light}>{item.title}</Typography>
-                        <Typography variant='h5'>{item.value}</Typography>
-                    </Stack>
-                ))}
-            </Stack>
-        </Stack>
+        </div>
     )
 }
 

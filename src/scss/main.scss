@@ -1,16 +1,41 @@
 @import "./reset.scss";
 @import "./variables.scss";
+@import "./mixins.scss";
 
 .container {
     max-width: 1440px;
     width: 100%;
     margin: 0 auto;
     padding: 0 32px;
+
+    @include Mobile {
+        padding: 16px;
+    }
+
+    @include Mobile {
+        padding: 16px;
+    }
 }
 
 .main {
     padding: 64px 0;
     background-color: $bg;
+
+    @include Tablet {
+        padding: 48px 0;
+
+        &__wrapper {
+            gap: 48px;
+        }
+    }
+
+    @include SmallTablet {
+        padding: 32px 0;
+
+        &__wrapper {
+            gap: 32px;
+        }
+    }
 
     &__wrapper {
         display: flex;

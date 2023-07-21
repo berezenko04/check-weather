@@ -17,10 +17,11 @@ type WeatherHourProps = {
     icon: string,
     conditions: string,
     feelslike: number,
-    index: number
+    index: boolean
 }
 
 const WeatherHour: React.FC<WeatherHourProps> = ({ active, datetime, temp, icon, conditions, feelslike, index }) => {
+    console.log(index);
     const theme = useTheme();
     const backgroundOpacity = active ? 0.25 : 0.10;
     const { tempUnit } = useSelector(weatherSelector);
@@ -35,7 +36,7 @@ const WeatherHour: React.FC<WeatherHourProps> = ({ active, datetime, temp, icon,
                     variant="h5"
                     color={active ? theme.palette.secondary.main : theme.palette.secondary.light}
                 >
-                    {index === 0 ? 'Now' : convertToAMPM(datetime)}
+                    {index ? 'Now' : convertToAMPM(datetime)}
                 </Typography>
                 <Stack direction='row' alignItems='center' spacing='24px'>
                     <WeatherIcon condition={icon} />

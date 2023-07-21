@@ -47,6 +47,23 @@ const DaysForecast: React.FC = () => {
                     swiperRef.current = swiper;
                 }}
                 onSlideChange={(swiper) => handleSlideChange(swiper)}
+                breakpoints={{
+                    0: {
+                        slidesPerView: 1
+                    },
+                    500: {
+                        slidesPerView: 2,
+                        spaceBetween: 16
+                    },
+                    768: {
+                        slidesPerView: 3,
+                        spaceBetween: 24
+                    },
+                    1440: {
+                        slidesPerView: 4,
+                        spaceBetween: 32
+                    }
+                }}
             >
                 {status === 'success' ?
                     currentWeather?.days.map((day, index) => (
