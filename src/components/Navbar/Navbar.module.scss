@@ -1,7 +1,8 @@
 @import "@/scss/variables.scss";
+@import '@/scss/mixins.scss';
 
 .navbar {
-    padding: 16px;
+    padding: 16px 0;
     background-color: $primary;
 
     &__wrapper {
@@ -9,5 +10,10 @@
         align-items: center;
         justify-content: space-between;
         gap: 24px;
+
+        @include SmallTablet {
+            flex-wrap: wrap;
+            gap: 12px 24px;
+        }
     }
 }

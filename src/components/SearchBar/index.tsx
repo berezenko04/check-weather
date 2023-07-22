@@ -128,6 +128,7 @@ export default function GoogleMaps() {
             autoComplete
             includeInputInList
             filterSelectedOptions
+            className={styles.searchbar}
             value={value}
             classes={{ noOptions: styles.noOptions }}
             noOptionsText="No locations"

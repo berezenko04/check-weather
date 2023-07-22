@@ -17,7 +17,6 @@ import { fetchCurrentWeather } from './redux/weather/asyncActions'
 import { weatherSelector } from './redux/weather/selectors'
 
 
-
 const App = () => {
   const dispatch = useAppDispatch();
   const { units, lastQuery, status } = useSelector(weatherSelector);

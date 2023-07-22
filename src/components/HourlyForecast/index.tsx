@@ -10,6 +10,7 @@ import 'swiper/css';
 //components
 import WeatherHour from '../WeatherHour';
 import SwiperControls from '../SwiperControls';
+import HourSkeleton from '../Skeletons/HourSkeleton';
 
 //redux
 import { weatherSelector } from '@/redux/weather/selectors';
@@ -19,7 +20,7 @@ const HourlyForecast: React.FC = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const swiperRef = useRef<SwiperType>();
     const nowHour = new Date().getHours();
-    const { currentWeather, currentDay } = useSelector(weatherSelector);
+    const { currentWeather, currentDay, status } = useSelector(weatherSelector);
 
     const handleSlideClick = (index: number) => {
         setActiveIndex(index);
@@ -65,14 +66,20 @@ const HourlyForecast: React.FC = () => {
                     }
                 }}
             >
-                {currentWeather?.days[currentDay].hours.map((hour, index) => (
-                    <SwiperSlide
-                        key={index}
-                        onClick={() => handleSlideClick(index)}
-                    >
-                        <WeatherHour active={index === activeIndex} index={nowHour === index} {...hour} />
-                    </SwiperSlide>
-                ))}
+                {status === 'success' ?
+                    currentWeather?.days[currentDay].hours.map((hour, index) => (
+                        <SwiperSlide
+                            key={index}
+                            onClick={() => handleSlideClick(index)}
+                        >
+                            <WeatherHour active={index === activeIndex} index={nowHour === index} {...hour} />
+                        </SwiperSlide>
+                    ))
+                    :
+                    [...Array(4)].map((_, index) => (
+                        <HourSkeleton key={index} />
+                    ))
+                }
             </Swiper>
         </div>
     )
