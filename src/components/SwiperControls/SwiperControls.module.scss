@@ -1,4 +1,4 @@
-@import '@/scss/mixins.scss';
+@import "@/scss/mixins.scss";
 
 .prev,
 .next {
@@ -7,8 +7,11 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 100;
-    width: 32px;
-    height: 32px;
+
+    @include SmallTablet {
+        width: 32px;
+        height: 32px;
+    }
 
     &:hover {
         background-color: rgba(255, 255, 255, 0.4) !important;
@@ -33,7 +36,6 @@
 
 .next {
     right: -24px;
-
 
     @include SmallTablet {
         right: -18px;

@@ -1,9 +1,4 @@
 .skeleton {
-    padding: 32px;
-    width: 100%;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.25);
-
     &__footer {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));

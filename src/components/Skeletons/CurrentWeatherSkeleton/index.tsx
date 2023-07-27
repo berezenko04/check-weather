@@ -9,27 +9,31 @@ const CurrentWeatherSkeleton: React.FC = () => {
         <div className={styles.skeleton}>
             <Stack direction='column' spacing='32px'>
                 <Stack direction='column' spacing='8px'>
-                    <Skeleton width={400} height={40} />
-                    <Skeleton width={300} height={30} />
+                    <Skeleton width={250} height={40} />
+                    <Skeleton width={270} height={30} />
                 </Stack>
-                <Stack direction='row' alignItems='center' spacing='32px'>
+                <Stack
+                    direction={{ xs: 'column', md: 'row' }}
+                    alignItems={{ xs: 'flex-start', md: 'center' }}
+                    spacing='32px'
+                >
                     <Stack direction='row' alignItems='center' spacing='24px'>
                         <Skeleton variant='rounded' width={64} height={64} />
-                        <Skeleton variant='rounded' width={240} height={48} />
+                        <Skeleton variant='rounded' width={180} height={48} />
                     </Stack>
                     <Stack direction='column' spacing='8px' width='100%'>
                         <Skeleton width={200} height={40} />
                         <Skeleton width={150} height={30} />
                     </Stack>
                 </Stack>
-                <Stack direction='row' spacing='32px'>
+                <div className={styles.skeleton__footer}>
                     {[...Array(5)].map((_, index) => (
                         <Stack direction='column' spacing='8px' width='100%' key={index}>
                             <Skeleton width={'100%'} height={40} />
                             <Skeleton width={'50%'} height={30} />
                         </Stack>
                     ))}
-                </Stack>
+                </div>
             </Stack>
         </div>
     )

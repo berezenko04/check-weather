@@ -3,7 +3,7 @@ export type WeatherIconProps = {
 };
 
 const WeatherIcon: React.FC<WeatherIconProps> = ({ condition }) => {
-    let imageSrc = '/WeatherIcons/';
+    let imageSrc = './WeatherIcons/';
 
     switch (condition.toLowerCase()) {
         case 'clear-day':
