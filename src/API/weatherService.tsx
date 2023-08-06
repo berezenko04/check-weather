@@ -1,4 +1,6 @@
 import axios from 'axios'
+
+//types
 import { WeatherItem } from '@/redux/weather/types';
 
 const DEFAULT_PATH_API = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';

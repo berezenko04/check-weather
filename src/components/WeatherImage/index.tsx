@@ -1,8 +1,8 @@
-type WeatherImageProps = {
+type TWeatherImageProps = {
     condition: string
 };
 
-const WeatherImage: React.FC<WeatherImageProps> = ({ condition }) => {
+const WeatherImage: React.FC<TWeatherImageProps> = ({ condition }) => {
     let imageSrc = './WeatherImages/';
 
     switch (condition.toLowerCase()) {

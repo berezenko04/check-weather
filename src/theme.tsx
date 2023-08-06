@@ -93,7 +93,7 @@ export const theme = createTheme({
         MuiTab: {
             styleOverrides: {
                 root: ({ }) => ({
-                    color: theme.palette.secondary.light
+                    color: theme.palette.secondary.light,
                 }),
             }
         },

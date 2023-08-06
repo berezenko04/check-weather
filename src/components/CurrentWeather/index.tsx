@@ -8,15 +8,13 @@ import styles from './CurrentWeather.module.scss'
 //utils
 import { format12Hours } from '@/utils/format12Hours'
 
-//icons
-import SunCloudsImg from '/WeatherImages/sun-clouds.jpg'
-
 //components
 import WeatherIcon from '../WeatherIcon'
+import WeatherImage from '../WeatherImage'
 
 //redux
 import { weatherSelector } from '@/redux/weather/selectors'
-import WeatherImage from '../WeatherImage'
+
 
 
 const CurrentWeather: React.FC = () => {

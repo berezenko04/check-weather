@@ -10,7 +10,7 @@ import { formatDate } from "@/utils/formateDate"
 //redux
 import { weatherSelector } from "@/redux/weather/selectors"
 
-type WeatherDayProps = {
+type TWeatherDayProps = {
     active: boolean,
     datetime: string,
     tempmin: number,
@@ -19,7 +19,7 @@ type WeatherDayProps = {
     index: number
 }
 
-const WeatherDay: React.FC<WeatherDayProps> = ({ active, datetime, tempmin, tempmax, icon, index }) => {
+const WeatherDay: React.FC<TWeatherDayProps> = ({ active, datetime, tempmin, tempmax, icon, index }) => {
     const theme = useTheme();
     const backgroundOpacity = active ? 0.25 : 0.10;
     const { tempUnit } = useSelector(weatherSelector);

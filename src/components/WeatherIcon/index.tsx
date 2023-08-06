@@ -1,8 +1,8 @@
-export type WeatherIconProps = {
+export type TWeatherIconProps = {
     condition: string;
 };
 
-const WeatherIcon: React.FC<WeatherIconProps> = ({ condition }) => {
+const WeatherIcon: React.FC<TWeatherIconProps> = ({ condition }) => {
     let imageSrc = './WeatherIcons/';
 
     switch (condition.toLowerCase()) {

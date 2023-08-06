@@ -19,6 +19,10 @@ interface WeatherDay extends WeatherCurrent {
     datetime: string;
     tempmin: number;
     tempmax: number;
+    sunrise: string;
+    sunset: string;
+    uvindex: number;
+    winddir: number;
     hours: WeatherHour[]
 }
 

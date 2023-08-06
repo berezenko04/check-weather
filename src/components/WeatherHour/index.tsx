@@ -10,7 +10,7 @@ import { convertToAMPM } from "@/utils/convertToAMPM"
 //redux
 import { weatherSelector } from "@/redux/weather/selectors"
 
-type WeatherHourProps = {
+type TWeatherHourProps = {
     active: boolean,
     datetime: string,
     temp: number,
@@ -20,7 +20,7 @@ type WeatherHourProps = {
     index: boolean
 }
 
-const WeatherHour: React.FC<WeatherHourProps> = ({ active, datetime, temp, icon, conditions, feelslike, index }) => {
+const WeatherHour: React.FC<TWeatherHourProps> = ({ active, datetime, temp, icon, conditions, feelslike, index }) => {
     console.log(index);
     const theme = useTheme();
     const backgroundOpacity = active ? 0.25 : 0.10;

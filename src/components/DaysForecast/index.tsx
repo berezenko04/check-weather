@@ -11,11 +11,11 @@ import 'swiper/css';
 //components
 import WeatherDay from '../WeatherDay';
 import SwiperControls from '../SwiperControls';
+import DaySkeleton from '../Skeletons/DaySkeleton';
 
 //redux
 import { weatherSelector } from '@/redux/weather/selectors';
 import { setCurrentDay } from '@/redux/weather/slice';
-import DaySkeleton from '../Skeletons/DaySkeleton';
 
 
 const DaysForecast: React.FC = () => {

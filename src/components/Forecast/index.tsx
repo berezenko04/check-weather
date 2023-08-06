@@ -14,6 +14,7 @@ import SummarySkeleton from '../Skeletons/SummarySkeleton'
 
 //redux
 import { weatherSelector } from '@/redux/weather/selectors'
+import MoreDetails from '../MoreDetails'
 
 
 const Forecast: React.FC = () => {
@@ -52,7 +53,9 @@ const Forecast: React.FC = () => {
                     >
                         <HourlyForecast />
                     </TabPanel>
-                    <TabPanel value="3" className={styles.forecast__tabpanel}>Item Three</TabPanel>
+                    <TabPanel value="3" className={styles.forecast__tabpanel}>
+                        <MoreDetails />
+                    </TabPanel>
                 </TabContext>
             </Box>
         </Stack>
